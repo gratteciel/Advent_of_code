@@ -42,11 +42,11 @@ int main() {
     }
     //insert data into a vector from the file
     while(!::feof(fileData)){// 2 characters per line
-            output = getc(fileData);
-            if(output !='\n')
-            {
-                match.push_back(output);
-            }
+        output = getc(fileData);
+        if(output !='\n')
+        {
+            match.push_back(output);
+        }
 
     }
     int i = 0;
@@ -109,4 +109,3 @@ int main() {
 
     return 0;
 }
-
