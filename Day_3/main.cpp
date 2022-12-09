@@ -13,11 +13,11 @@ int main() {
 
     //for each match
     std::vector<string> match;
-    std::map <string, string> mapRes;// map for both part we"ll split the vector
+    std::map<string, string> mapRes;// map for both part we"ll split the vector
 
     ///Map for alphabet
     map<string, int> alphabet;
-    int result = 0;
+
 
     // Insert the lowercase letters into the map
     alphabet.insert({"a", 1});
@@ -70,44 +70,49 @@ int main() {
     alphabet.insert({"U", 47});
     alphabet.insert({"V", 48});
     alphabet.insert({"W", 49});
-    alphabet.insert({"X", 51});
-    alphabet.insert({"Y", 52});
-    alphabet.insert({"Z", 53});
+    alphabet.insert({"X", 50});
+    alphabet.insert({"Y", 51});
+    alphabet.insert({"Z", 52});
 
     //opening the file
-    std::ifstream fileData(R"(C:\Users\mitue\OneDrive\Documents\Perso\adventofCode\advent_of_code_project\Day_3\data.txt)");
+    std::ifstream fileData(
+            R"(C:\Users\mitue\OneDrive\Documents\Perso\adventofCode\advent_of_code_project\Day_3\data.txt)");
     string output;
 
-    if(!fileData){
+    if (!fileData) {
         std::cout << "issue for opening the file" << std::endl;
     }
+    int line = 0;
+    std::vector<std::vector<string>> output3Line;
     //insert data into a vector from the file
-    while(std::getline(fileData, output)){
+    while (std::getline(fileData, output)) {
 
         match.push_back(output);
+        if(line%3 == 0){
+
+        }
         //insert into map the values / 2
-        mapRes[match.back().substr(0,match.back().size()/2)]=match.back().substr(match.back().size()/2,match.back().size());
+        mapRes[match.back().substr(0, match.back().size() / 2)] = match.back().substr(match.back().size() / 2,
+                                                                                      match.back().size());
+
+
     }
     //compare to find the character in common between 2 string at we put in a map
-    std::map<string,int> letterValue;
-    int valueLetterValue = 0;
+    std::map<string, int> letterValue;
 
+    int result = 0;
     //find the character
     for (auto it = mapRes.begin(); it != mapRes.end(); it++) {
 
         set<char> set1(it->first.begin(), it->first.end());
         set<char> set2(it->second.begin(), it->second.end());
         string common_chars;
-        set_intersection(set1.begin(), set1.end(), set2.begin(), set2.end(),
-                         back_inserter(common_chars));
-
+        set_intersection(set1.begin(), set1.end(), set2.begin(), set2.end(), back_inserter(common_chars));
         letterValue[common_chars] = alphabet.at(common_chars);
-        result  += alphabet.at(common_chars);
+        result += alphabet.at(common_chars);
 
-        cout << it->first << "/"<< it->second << " :";
+        cout << it->first << "/" << it->second << " :";
         cout << common_chars << " result atm : " << result << endl;
-
-
     }
 
     cout << "Result:" << result << endl;
