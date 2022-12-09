@@ -33,7 +33,7 @@ int main() {
     std::vector<char> match;
 
     //opening the file
-    string filenamePath(R"(C:\Users\mitue\OneDrive\Documents\ECE\advent_of_code\Day_2\data.txt)");
+    string filenamePath(R"(C:\Users\mitue\OneDrive\Documents\Perso\adventofCode\advent_of_code_project\Day_2\data.txt)");
     FILE *fileData = ::fopen(filenamePath.c_str(),"r");
     char output;
 
@@ -42,11 +42,11 @@ int main() {
     }
     //insert data into a vector from the file
     while(!::feof(fileData)){// 2 characters per line
-            output = getc(fileData);
-            if(output !='\n')
-            {
-                match.push_back(output);
-            }
+        output = getc(fileData);
+        if(output !='\n')
+        {
+            match.push_back(output);
+        }
 
     }
     int i = 0;
@@ -54,64 +54,58 @@ int main() {
     //can do it in a different function
     //calculate the score
     for (int x = 0; x+i+1 < match.size() ; ++x) {
-        switch (match[x+i+2]) {
-            // X = lose => 1 ; Y= draw => 1 + 3; Z = win => 3+6
+        switch (match[x+i]) {
             case 'A': //rock
-                user += 1;
-                /*switch (match[x+i]) {
-                    case 'A':
+                switch (match[x+i+2]) {
+                    case 'X':
                         user += 3;
                         break;
-                    case 'B':
-                        user += 0;
+                    case 'Y':
+                        user += 1+3;
                         break;
-                    case 'C':
-                        user += 6;
+                    case 'Z':
+                        user += 2+6;
                         break;
-                    default:
-                        return 1;
-                }*/
+
+                }
                 break;
             case 'B': //paper
-                user += 2+3;
-                /*switch (match[x+i]) {
-                    case 'A':
-                        user += 6;
+                switch (match[x+i+2]) {
+                    case 'X':
+                        user += 1;
                         break;
-                    case 'B':
-                        user += 3;
+                    case 'Y':
+                        user += 2+3;
                         break;
-                    case 'C':
-                        user += 0;
+                    case 'Z':
+                        user += 3+6;
                         break;
-                    default:
-                        return 1;
-                }*/
+
+                }
                 break;
             case 'C': //scissors
-                user += 3+6;
-                /*switch (match[x+i]) {
-                    case 'A':
-                        user += 0;
+                switch (match[x+i+2]) {
+                    case 'X':
+                        user += 2;
                         break;
-                    case 'B':
-                        user += 6;
+                    case 'Y':
+                        user += 3+3;
                         break;
-                    case 'C':
-                        user += 3;
+                    case 'Z':
+                        user += 1+6;
                         break;
-                    default:
-                        return 1;
-                }*/
-                break;
 
+                }
+                break;
         }
+
         i +=2;
 
+        cout << "Score for you: ";
+        cout << user << endl;
     }
     cout << "Final score for you: ";
     cout << user << endl;
 
     return 0;
 }
-
