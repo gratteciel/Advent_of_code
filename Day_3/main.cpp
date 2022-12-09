@@ -76,7 +76,7 @@ int main() {
 
     //opening the file
     std::ifstream fileData(
-            R"(C:\Users\mitue\OneDrive\Documents\Perso\adventofCode\advent_of_code_project\Day_3\data.txt)");
+            R"(C:\Users\mitue\OneDrive\Documents\ECE\advent_of_code\Day_3\data.txt)");
     string output;
 
     if (!fileData) {
@@ -88,32 +88,54 @@ int main() {
     while (std::getline(fileData, output)) {
 
         match.push_back(output);
-        if(line%3 == 0){
+    }
+    std::map<string, int> letterValue;
+    int result = 0;
+    int j =0;
 
-        }
-        //insert into map the values / 2
-        mapRes[match.back().substr(0, match.back().size() / 2)] = match.back().substr(match.back().size() / 2,
-                                                                                      match.back().size());
+    for (std::vector<string>::iterator it = match.begin(); it < match.end();) {
+        //cout  << "hello";
+
+            string value ="";
+            set<char> set1(it->begin(), it->end());
+            set<char> set2((it+1)->begin(), (it+1)->end());
+            set<char> set3((it+2)->begin(), (it+2)->end());
+
+            string commonChar ="";
+            std::set_intersection(set1.begin(), set1.end(),
+                                  set2.begin(), set2.end(),
+                                  back_inserter(commonChar));
+
+            std::set_intersection(commonChar.begin(), commonChar.end(),
+                                  set3.begin(), set3.end(),
+                                  back_inserter(value));
+
+            commonChar ="";
+
+            it = std::next(it,3);
+
+
+            letterValue[value] = alphabet.at(value);
+            result += alphabet.at(value);
+
 
 
     }
     //compare to find the character in common between 2 string at we put in a map
-    std::map<string, int> letterValue;
 
-    int result = 0;
+
     //find the character
-    for (auto it = mapRes.begin(); it != mapRes.end(); it++) {
+    /*for (auto it = mapRes.begin(); it != mapRes.end(); it++) {
 
         set<char> set1(it->first.begin(), it->first.end());
         set<char> set2(it->second.begin(), it->second.end());
         string common_chars;
         set_intersection(set1.begin(), set1.end(), set2.begin(), set2.end(), back_inserter(common_chars));
-        letterValue[common_chars] = alphabet.at(common_chars);
-        result += alphabet.at(common_chars);
+
 
         cout << it->first << "/" << it->second << " :";
         cout << common_chars << " result atm : " << result << endl;
-    }
+    }*/
 
     cout << "Result:" << result << endl;
 
