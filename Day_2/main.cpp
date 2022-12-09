@@ -55,9 +55,10 @@ int main() {
     //calculate the score
     for (int x = 0; x+i+1 < match.size() ; ++x) {
         switch (match[x+i+2]) {
-            case 'X': //rock
+            // X = lose => 1 ; Y= draw => 1 + 3; Z = win => 3+6
+            case 'A': //rock
                 user += 1;
-                switch (match[x+i]) {
+                /*switch (match[x+i]) {
                     case 'A':
                         user += 3;
                         break;
@@ -69,11 +70,11 @@ int main() {
                         break;
                     default:
                         return 1;
-                }
+                }*/
                 break;
-            case 'Y': //paper
-                user += 2;
-                switch (match[x+i]) {
+            case 'B': //paper
+                user += 2+3;
+                /*switch (match[x+i]) {
                     case 'A':
                         user += 6;
                         break;
@@ -85,11 +86,11 @@ int main() {
                         break;
                     default:
                         return 1;
-                }
+                }*/
                 break;
-            case 'Z': //scissors
-                user += 3;
-                switch (match[x+i]) {
+            case 'C': //scissors
+                user += 3+6;
+                /*switch (match[x+i]) {
                     case 'A':
                         user += 0;
                         break;
@@ -101,7 +102,7 @@ int main() {
                         break;
                     default:
                         return 1;
-                }
+                }*/
                 break;
 
         }
